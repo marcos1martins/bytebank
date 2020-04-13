@@ -1,4 +1,4 @@
-import 'package:bytebank/database/app_database.dart';
+import 'package:bytebank/database/dao/contact_dao.dart';
 import 'package:bytebank/models/contact.dart';
 import 'package:bytebank/screens/contact_form.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +9,9 @@ class ContactsList extends StatefulWidget {
 }
 
 class _ContactsListState extends State<ContactsList> {
+
+  ContactDao _dao = ContactDao();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +19,7 @@ class _ContactsListState extends State<ContactsList> {
         title: Text("Contacts"),
       ),
       body: FutureBuilder<List<Contact>>(
-        future: findAll(),
+        future: _dao.findAll(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final List<Contact> contacts = snapshot.data;
